@@ -1,26 +1,33 @@
-function room() {
+function room(id=0) {
+  this.id = id;
   //название коменты
-  let name;
+  this.name;
   //пользователи которые находятся в комнате 
-  let users = [];
+  this.users = [];
   //id пользователя у которого есть права на изменение 
-  let adminID = 0;
+  this.adminID = 0;
   //статус комнаты 
-  let status = "lobby";
+  this.status = "lobby";
 
   //вызываем колбек функции которая уничтожает эту комнату 
-  let onEmptyRoom;
+  this.onEmptyRoom;
   
   //добавление пользователя при успещной авторизации 
-  let addUser = (ws,password,isAdmin) => {
-    ws.addEventListener("message", listener, false);
+  this.addUser=(ws,password,isAdmin)=>{
+    ws.addEventListener("message", listener, id);
 
   };
 
-  let deleteUser = (id) => {
+  this.deleteUser = (id) => {
     delete this.users[id];
     if (this.users <= 0) {
       onEmptyRoom();
     }
   };
+
+  function update(id)
+  {
+
+  }
 }
+export default room

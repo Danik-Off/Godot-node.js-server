@@ -35,4 +35,18 @@ func callBack():
 	var json_string = JSON.stringify("PING")
 	
 	socket.put_packet(json_string.to_ascii_buffer())
+
+func connectRoom(idRoom):
+	var data = {"action":"connectToRoom","roomId":idRoom}
+	var js = JSON.stringify(data)
+	socket.put_var(js)
 	
+func sendMsg(text):
+	var data = {"action":"sendMsg","text":text}
+	var js = JSON.stringify(data)
+	socket.put_var(js)
+
+func updatePos(text):
+	var data = {"action":"sendMsg","text":text}
+	var js = JSON.stringify(data)
+	socket.put_var(js)

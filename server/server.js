@@ -1,8 +1,9 @@
-const WebSocket = require('ws');
-const room = require('./room');
+// const WebSocket = require('ws');
+import { WebSocketServer } from 'ws';
+import room from './room.js';
 
 
-const wsServer = new WebSocket.Server({port:3000});
+const wsServer = new WebSocketServer({port:3000})
 
 wsServer.on('connection', onConnect);
 wsServer.on('listening', function(){console.log('Ожидание поодключения')});
@@ -20,8 +21,8 @@ function onConnect(ws) {
     
     let id =parseInt(Math.random()*1000000);
     clients[id] = ws;
-    createRoom(id);
-    console.log(clients)
+    // createRoom(id);
+    //{type:"service",action:"welcome"}
     console.log("новое соединение " + id);
     ws.send('Привет');
    
@@ -37,22 +38,19 @@ function onConnect(ws) {
       console.log('соединение закрыто ' + id);
       delete clients[id];
     });
-
-
   }
-function createRoom(userId)
-{
-  let newRoom =  new room();
-  newRoom.addUser(userId);
-  rooms.push();  
-} 
-function createRoom(userId)
-{ let id =parseInt(Math.random()*1000000);
-  let newRoom =  new room();
-  newRoom.addUser(userId);
-  rooms[id] = newRoom;  
-} 
 
+function createRoom(userId){
+  let id =parseInt(Math.random()*1000000);
+  let newRoom =  new room();
+  console.log(newRoom)
+  newRoom.addUser(userId);
+  // rooms[id] = newRoom;  
+  } 
+function sendServiceInfo(id,code,...args){
+  let msg = JSON.stringify()
+  clients[id].send(msg)
+}
 
 
 
